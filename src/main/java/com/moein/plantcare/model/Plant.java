@@ -32,6 +32,10 @@ public class Plant {
 			throw new IllegalArgumentException("Last watered date must not be null");
 		}
 
+		if (lastWateredDate.isAfter(LocalDate.now())) {
+			throw new IllegalArgumentException("Last watered date must not be in the future");
+		}
+
 		this.id = id;
 		this.name = name;
 		this.location = location;
