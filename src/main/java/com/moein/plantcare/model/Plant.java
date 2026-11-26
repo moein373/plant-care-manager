@@ -28,6 +28,10 @@ public class Plant {
 			throw new IllegalArgumentException("Watering interval must be positive");
 		}
 
+		if (lastWateredDate == null) {
+			throw new IllegalArgumentException("Last watered date must not be null");
+		}
+
 		this.id = id;
 		this.name = name;
 		this.location = location;
