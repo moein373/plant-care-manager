@@ -4,10 +4,12 @@ public class Plant {
 
 	private final String id;
 	private final String name;
+	private final String location;
 
 	public Plant(String id, String name, String location) {
 		this.id = id;
 		this.name = name;
+		this.location = location;
 	}
 
 	public String getId() {
@@ -19,6 +21,6 @@ public class Plant {
 	}
 
 	public String getLocation() {
-		return null;
+		return location;
 	}
 }
