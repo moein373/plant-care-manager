@@ -83,4 +83,10 @@ public class PlantTest {
 		assertThrows(IllegalArgumentException.class,
 				() -> new Plant("P001", "Monstera", null, 7, LocalDate.of(2026, 11, 20)));
 	}
+
+	@Test
+	public void testPlantWithEmptyLocation() {
+		assertThrows(IllegalArgumentException.class,
+				() -> new Plant("P001", "Monstera", "", 7, LocalDate.of(2026, 11, 20)));
+	}
 }
