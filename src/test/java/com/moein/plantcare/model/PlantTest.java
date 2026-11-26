@@ -65,4 +65,10 @@ public class PlantTest {
 		assertThrows(IllegalArgumentException.class,
 				() -> new Plant("P001", null, "Living Room", 7, LocalDate.of(2026, 11, 20)));
 	}
+
+	@Test
+	public void testPlantWithEmptyName() {
+		assertThrows(IllegalArgumentException.class,
+				() -> new Plant("P001", "", "Living Room", 7, LocalDate.of(2026, 11, 20)));
+	}
 }
