@@ -3,9 +3,11 @@ package com.moein.plantcare.model;
 public class Plant {
 
 	private final String id;
+	private final String name;
 
 	public Plant(String id, String name) {
 		this.id = id;
+		this.name = name;
 	}
 
 	public String getId() {
@@ -13,6 +15,6 @@ public class Plant {
 	}
 
 	public String getName() {
-		return null;
+		return name;
 	}
 }
