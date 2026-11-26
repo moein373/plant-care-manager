@@ -16,8 +16,8 @@ public class Plant {
 			throw new IllegalArgumentException("Plant ID must not be null or blank");
 		}
 
-		if (name == null || name.isEmpty()) {
-			throw new IllegalArgumentException("Plant name must not be null or empty");
+		if (name == null || name.isBlank()) {
+			throw new IllegalArgumentException("Plant name must not be null or blank");
 		}
 
 		this.id = id;
