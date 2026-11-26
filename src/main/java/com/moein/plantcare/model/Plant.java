@@ -5,11 +5,13 @@ public class Plant {
 	private final String id;
 	private final String name;
 	private final String location;
+	private final int wateringIntervalDays;
 
 	public Plant(String id, String name, String location, int wateringIntervalDays) {
 		this.id = id;
 		this.name = name;
 		this.location = location;
+		this.wateringIntervalDays = wateringIntervalDays;
 	}
 
 	public String getId() {
@@ -25,6 +27,6 @@ public class Plant {
 	}
 
 	public int getWateringIntervalDays() {
-		return 0;
+		return wateringIntervalDays;
 	}
 }
