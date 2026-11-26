@@ -12,8 +12,8 @@ public class Plant {
 
 	public Plant(String id, String name, String location, int wateringIntervalDays, LocalDate lastWateredDate) {
 
-		if (id == null || id.isEmpty()) {
-			throw new IllegalArgumentException("Plant ID must not be null or empty");
+		if (id == null || id.isBlank()) {
+			throw new IllegalArgumentException("Plant ID must not be null or blank");
 		}
 
 		this.id = id;
