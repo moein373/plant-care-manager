@@ -125,4 +125,19 @@ public class PlantTest {
 		assertThrows(IllegalArgumentException.class,
 				() -> new Plant("P001", "Monstera", "Living Room", 7, LocalDate.MAX));
 	}
+
+	@Test
+	public void testPlantWithTodayAsLastWateredDate() {
+		LocalDate today = LocalDate.now();
+		Plant plant = new Plant("P001", "Monstera", "Living Room", 7, today);
+
+		assertEquals(today, plant.getLastWateredDate());
+	}
+
+	@Test
+	public void testPlantWithTomorrowAsLastWateredDate() {
+		LocalDate tomorrow = LocalDate.now().plusDays(1);
+
+		assertThrows(IllegalArgumentException.class, () -> new Plant("P001", "Monstera", "Living Room", 7, tomorrow));
+	}
 }
