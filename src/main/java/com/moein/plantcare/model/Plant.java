@@ -20,6 +20,10 @@ public class Plant {
 			throw new IllegalArgumentException("Plant name must not be null or blank");
 		}
 
+		if (location == null) {
+			throw new IllegalArgumentException("Plant location must not be null");
+		}
+
 		this.id = id;
 		this.name = name;
 		this.location = location;
