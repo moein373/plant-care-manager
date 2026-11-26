@@ -1,6 +1,7 @@
 package com.moein.plantcare.model;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 import java.time.LocalDate;
 
@@ -39,5 +40,11 @@ public class PlantTest {
 	@Test
 	public void testPlantLastWateredDate() {
 		assertEquals(LocalDate.of(2026, 11, 20), plant.getLastWateredDate());
+	}
+
+	@Test
+	public void testPlantWithNullId() {
+		assertThrows(IllegalArgumentException.class,
+				() -> new Plant(null, "Monstera", "Living Room", 7, LocalDate.of(2026, 11, 20)));
 	}
 }
