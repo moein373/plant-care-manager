@@ -3,12 +3,17 @@ package com.moein.plantcare.model;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
 
+import java.time.Clock;
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.ZoneOffset;
 
 import org.junit.Before;
 import org.junit.Test;
 
 public class PlantTest {
+
+	private static final Clock FIXED_CLOCK = Clock.fixed(Instant.parse("2026-11-26T12:00:00Z"), ZoneOffset.UTC);
 
 	private Plant plant;
 
@@ -128,16 +133,18 @@ public class PlantTest {
 
 	@Test
 	public void testPlantWithTodayAsLastWateredDate() {
-		LocalDate today = LocalDate.now();
-		Plant plant = new Plant("P001", "Monstera", "Living Room", 7, today);
+		LocalDate today = LocalDate.now(FIXED_CLOCK);
+
+		Plant plant = new Plant("P001", "Monstera", "Living Room", 7, today, FIXED_CLOCK);
 
 		assertEquals(today, plant.getLastWateredDate());
 	}
 
 	@Test
 	public void testPlantWithTomorrowAsLastWateredDate() {
-		LocalDate tomorrow = LocalDate.now().plusDays(1);
+		LocalDate tomorrow = LocalDate.now(FIXED_CLOCK).plusDays(1);
 
-		assertThrows(IllegalArgumentException.class, () -> new Plant("P001", "Monstera", "Living Room", 7, tomorrow));
+		assertThrows(IllegalArgumentException.class,
+				() -> new Plant("P001", "Monstera", "Living Room", 7, tomorrow, FIXED_CLOCK));
 	}
 }

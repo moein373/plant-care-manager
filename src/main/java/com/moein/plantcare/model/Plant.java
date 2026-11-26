@@ -1,5 +1,6 @@
 package com.moein.plantcare.model;
 
+import java.time.Clock;
 import java.time.LocalDate;
 
 public class Plant {
@@ -11,6 +12,10 @@ public class Plant {
 	private final LocalDate lastWateredDate;
 
 	public Plant(String id, String name, String location, int wateringIntervalDays, LocalDate lastWateredDate) {
+		this(id, name, location, wateringIntervalDays, lastWateredDate, Clock.systemDefaultZone());
+	}
+
+	Plant(String id, String name, String location, int wateringIntervalDays, LocalDate lastWateredDate, Clock clock) {
 
 		if (id == null || id.isBlank()) {
 			throw new IllegalArgumentException("Plant ID must not be null or blank");
@@ -32,7 +37,7 @@ public class Plant {
 			throw new IllegalArgumentException("Last watered date must not be null");
 		}
 
-		if (lastWateredDate.isAfter(LocalDate.now())) {
+		if (lastWateredDate.isAfter(LocalDate.now(clock))) {
 			throw new IllegalArgumentException("Last watered date must not be in the future");
 		}
 
