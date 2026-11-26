@@ -5,7 +5,7 @@ public class Plant {
 	private final String id;
 	private final String name;
 
-	public Plant(String id, String name) {
+	public Plant(String id, String name, String location) {
 		this.id = id;
 		this.name = name;
 	}
@@ -16,5 +16,9 @@ public class Plant {
 
 	public String getName() {
 		return name;
+	}
+
+	public String getLocation() {
+		return null;
 	}
 }
