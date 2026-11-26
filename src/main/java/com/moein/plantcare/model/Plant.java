@@ -1,5 +1,7 @@
 package com.moein.plantcare.model;
 
+import java.time.LocalDate;
+
 public class Plant {
 
 	private final String id;
@@ -7,7 +9,7 @@ public class Plant {
 	private final String location;
 	private final int wateringIntervalDays;
 
-	public Plant(String id, String name, String location, int wateringIntervalDays) {
+	public Plant(String id, String name, String location, int wateringIntervalDays, LocalDate lastWateredDate) {
 		this.id = id;
 		this.name = name;
 		this.location = location;
@@ -28,5 +30,9 @@ public class Plant {
 
 	public int getWateringIntervalDays() {
 		return wateringIntervalDays;
+	}
+
+	public LocalDate getLastWateredDate() {
+		return null;
 	}
 }
