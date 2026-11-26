@@ -101,4 +101,10 @@ public class PlantTest {
 		assertThrows(IllegalArgumentException.class,
 				() -> new Plant("P001", "Monstera", "Living Room", 0, LocalDate.of(2026, 11, 20)));
 	}
+
+	@Test
+	public void testPlantWithNegativeWateringInterval() {
+		assertThrows(IllegalArgumentException.class,
+				() -> new Plant("P001", "Monstera", "Living Room", -1, LocalDate.of(2026, 11, 20)));
+	}
 }
