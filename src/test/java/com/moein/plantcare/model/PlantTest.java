@@ -114,4 +114,9 @@ public class PlantTest {
 
 		assertEquals(1, plant.getWateringIntervalDays());
 	}
+
+	@Test
+	public void testPlantWithNullLastWateredDate() {
+		assertThrows(IllegalArgumentException.class, () -> new Plant("P001", "Monstera", "Living Room", 7, null));
+	}
 }
