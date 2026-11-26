@@ -119,4 +119,10 @@ public class PlantTest {
 	public void testPlantWithNullLastWateredDate() {
 		assertThrows(IllegalArgumentException.class, () -> new Plant("P001", "Monstera", "Living Room", 7, null));
 	}
+
+	@Test
+	public void testPlantWithFutureLastWateredDate() {
+		assertThrows(IllegalArgumentException.class,
+				() -> new Plant("P001", "Monstera", "Living Room", 7, LocalDate.MAX));
+	}
 }
