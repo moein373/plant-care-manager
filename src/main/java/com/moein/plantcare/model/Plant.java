@@ -11,6 +11,11 @@ public class Plant {
 	private final LocalDate lastWateredDate;
 
 	public Plant(String id, String name, String location, int wateringIntervalDays, LocalDate lastWateredDate) {
+
+		if (id == null) {
+			throw new IllegalArgumentException("Plant ID must not be null");
+		}
+
 		this.id = id;
 		this.name = name;
 		this.location = location;
