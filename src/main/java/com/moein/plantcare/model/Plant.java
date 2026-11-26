@@ -24,8 +24,8 @@ public class Plant {
 			throw new IllegalArgumentException("Plant location must not be null or blank");
 		}
 
-		if (wateringIntervalDays == 0) {
-			throw new IllegalArgumentException("Watering interval must not be zero");
+		if (wateringIntervalDays <= 0) {
+			throw new IllegalArgumentException("Watering interval must be positive");
 		}
 
 		this.id = id;
