@@ -3,8 +3,11 @@ package com.moein.plantcare.repository.mongo;
 import static org.junit.Assert.assertEquals;
 
 import java.net.InetSocketAddress;
+import java.time.LocalDate;
 import java.util.Collections;
+import java.util.List;
 
+import org.bson.Document;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -13,6 +16,8 @@ import org.junit.Test;
 
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoCollection;
+import com.moein.plantcare.model.Plant;
 
 import de.bwaldvogel.mongo.MongoServer;
 import de.bwaldvogel.mongo.backend.memory.MemoryBackend;
@@ -27,6 +32,7 @@ public class PlantMongoRepositoryTest {
 
 	private MongoClient client;
 	private PlantMongoRepository plantRepository;
+	private MongoCollection<Document> plantCollection;
 
 	@BeforeClass
 	public static void setupServer() {
@@ -46,6 +52,8 @@ public class PlantMongoRepositoryTest {
 		client.getDatabase(DB_NAME).drop();
 
 		plantRepository = new PlantMongoRepository(client, DB_NAME, COLLECTION_NAME);
+
+		plantCollection = client.getDatabase(DB_NAME).getCollection(COLLECTION_NAME);
 	}
 
 	@After
@@ -56,5 +64,38 @@ public class PlantMongoRepositoryTest {
 	@Test
 	public void testFindAllWhenDatabaseIsEmpty() {
 		assertEquals(Collections.emptyList(), plantRepository.findAll());
+	}
+
+	@Test
+	public void testFindAllWhenDatabaseIsNotEmpty() {
+		addTestPlantToDatabase("P001", "Monstera", "Living Room", 7, LocalDate.of(2000, 1, 3));
+
+		addTestPlantToDatabase("P002", "Cactus", "Bedroom", 14, LocalDate.of(2000, 1, 4));
+
+		List<Plant> plants = plantRepository.findAll();
+
+		assertEquals(2, plants.size());
+
+		Plant first = plants.stream().filter(plant -> "P001".equals(plant.getId())).findFirst().orElseThrow();
+
+		Plant second = plants.stream().filter(plant -> "P002".equals(plant.getId())).findFirst().orElseThrow();
+
+		assertEquals("Monstera", first.getName());
+		assertEquals("Living Room", first.getLocation());
+		assertEquals(7, first.getWateringIntervalDays());
+		assertEquals(LocalDate.of(2000, 1, 3), first.getLastWateredDate());
+
+		assertEquals("Cactus", second.getName());
+		assertEquals("Bedroom", second.getLocation());
+		assertEquals(14, second.getWateringIntervalDays());
+		assertEquals(LocalDate.of(2000, 1, 4), second.getLastWateredDate());
+	}
+
+	private void addTestPlantToDatabase(String id, String name, String location, int wateringIntervalDays,
+			LocalDate lastWateredDate) {
+
+		plantCollection.insertOne(new Document().append("id", id).append("name", name).append("location", location)
+				.append("wateringIntervalDays", wateringIntervalDays)
+				.append("lastWateredDate", lastWateredDate.toString()));
 	}
 }
