@@ -24,10 +24,7 @@ public class PlantMongoRepository implements PlantRepository {
 
 	@Override
 	public List<Plant> findAll() {
-		return StreamSupport.stream(plantCollection.find().spliterator(), false)
-				.map(document -> new Plant(document.getString("id"), document.getString("name"),
-						document.getString("location"), document.getInteger("wateringIntervalDays"),
-						LocalDate.parse(document.getString("lastWateredDate"))))
+		return StreamSupport.stream(plantCollection.find().spliterator(), false).map(this::fromDocumentToPlant)
 				.collect(Collectors.toList());
 	}
 
@@ -36,9 +33,7 @@ public class PlantMongoRepository implements PlantRepository {
 		Document document = plantCollection.find(Filters.eq("id", id)).first();
 
 		if (document != null) {
-			return new Plant(document.getString("id"), document.getString("name"), document.getString("location"),
-					document.getInteger("wateringIntervalDays"),
-					LocalDate.parse(document.getString("lastWateredDate")));
+			return fromDocumentToPlant(document);
 		}
 
 		return null;
@@ -50,5 +45,10 @@ public class PlantMongoRepository implements PlantRepository {
 
 	@Override
 	public void delete(String id) {
+	}
+
+	private Plant fromDocumentToPlant(Document document) {
+		return new Plant(document.getString("id"), document.getString("name"), document.getString("location"),
+				document.getInteger("wateringIntervalDays"), LocalDate.parse(document.getString("lastWateredDate")));
 	}
 }
