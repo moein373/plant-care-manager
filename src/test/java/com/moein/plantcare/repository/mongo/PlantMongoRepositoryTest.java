@@ -114,6 +114,24 @@ public class PlantMongoRepositoryTest {
 		assertEquals(LocalDate.of(2000, 1, 4), plant.getLastWateredDate());
 	}
 
+	@Test
+	public void testSave() {
+		Plant plant = new Plant("P001", "Monstera", "Living Room", 7, LocalDate.of(2000, 1, 3));
+
+		plantRepository.save(plant);
+
+		assertEquals(1L, plantCollection.countDocuments());
+
+		Document document = plantCollection.find().first();
+
+		assertNotNull(document);
+		assertEquals("P001", document.getString("id"));
+		assertEquals("Monstera", document.getString("name"));
+		assertEquals("Living Room", document.getString("location"));
+		assertEquals(Integer.valueOf(7), document.getInteger("wateringIntervalDays"));
+		assertEquals("2000-01-03", document.getString("lastWateredDate"));
+	}
+
 	private void addTestPlantToDatabase(String id, String name, String location, int wateringIntervalDays,
 			LocalDate lastWateredDate) {
 
