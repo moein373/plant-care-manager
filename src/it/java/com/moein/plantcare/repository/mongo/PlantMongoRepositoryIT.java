@@ -1,6 +1,7 @@
 package com.moein.plantcare.repository.mongo;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -68,6 +69,22 @@ public class PlantMongoRepositoryIT {
 		assertEquals("Bedroom", second.getLocation());
 		assertEquals(14, second.getWateringIntervalDays());
 		assertEquals(LocalDate.of(2000, 1, 4), second.getLastWateredDate());
+	}
+
+	@Test
+	public void testFindById() {
+		addTestPlantToDatabase("P001", "Monstera", "Living Room", 7, LocalDate.of(2000, 1, 3));
+
+		addTestPlantToDatabase("P002", "Cactus", "Bedroom", 14, LocalDate.of(2000, 1, 4));
+
+		Plant plant = plantRepository.findById("P002");
+
+		assertNotNull(plant);
+		assertEquals("P002", plant.getId());
+		assertEquals("Cactus", plant.getName());
+		assertEquals("Bedroom", plant.getLocation());
+		assertEquals(14, plant.getWateringIntervalDays());
+		assertEquals(LocalDate.of(2000, 1, 4), plant.getLastWateredDate());
 	}
 
 	private void addTestPlantToDatabase(String id, String name, String location, int wateringIntervalDays,
