@@ -1,5 +1,6 @@
 package com.moein.plantcare.repository.mongo;
 
+import java.util.Collections;
 import java.util.List;
 
 import com.mongodb.client.MongoClient;
@@ -13,7 +14,7 @@ public class PlantMongoRepository implements PlantRepository {
 
 	@Override
 	public List<Plant> findAll() {
-		return null;
+		return Collections.emptyList();
 	}
 
 	@Override
