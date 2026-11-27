@@ -9,6 +9,7 @@ import org.bson.Document;
 
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.model.Filters;
 import com.moein.plantcare.model.Plant;
 import com.moein.plantcare.repository.PlantRepository;
 
@@ -32,6 +33,14 @@ public class PlantMongoRepository implements PlantRepository {
 
 	@Override
 	public Plant findById(String id) {
+		Document document = plantCollection.find(Filters.eq("id", id)).first();
+
+		if (document != null) {
+			return new Plant(document.getString("id"), document.getString("name"), document.getString("location"),
+					document.getInteger("wateringIntervalDays"),
+					LocalDate.parse(document.getString("lastWateredDate")));
+		}
+
 		return null;
 	}
 
