@@ -48,6 +48,7 @@ public class PlantMongoRepository implements PlantRepository {
 
 	@Override
 	public void delete(String id) {
+		plantCollection.deleteOne(Filters.eq("id", id));
 	}
 
 	private Plant fromDocumentToPlant(Document document) {
