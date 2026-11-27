@@ -41,6 +41,9 @@ public class PlantMongoRepository implements PlantRepository {
 
 	@Override
 	public void save(Plant plant) {
+		plantCollection.insertOne(new Document().append("id", plant.getId()).append("name", plant.getName())
+				.append("location", plant.getLocation()).append("wateringIntervalDays", plant.getWateringIntervalDays())
+				.append("lastWateredDate", plant.getLastWateredDate().toString()));
 	}
 
 	@Override
