@@ -14,6 +14,6 @@ public class PlantController {
 	}
 
 	public void allPlants() {
-
+		plantView.showAllPlants(plantRepository.findAll());
 	}
 }
