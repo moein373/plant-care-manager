@@ -12,4 +12,6 @@ public interface PlantView {
 
 	void showError(String message, Plant plant);
 
+	void plantRemoved(Plant plant);
+
 }

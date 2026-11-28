@@ -29,4 +29,8 @@ public class PlantController {
 		plantRepository.save(plant);
 		plantView.plantAdded(plant);
 	}
+
+	public void deletePlant(Plant plant) {
+
+	}
 }
