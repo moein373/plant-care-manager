@@ -8,4 +8,6 @@ public interface PlantView {
 
 	void showAllPlants(List<Plant> plants);
 
+	void plantAdded(Plant plant);
+
 }

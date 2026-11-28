@@ -1,5 +1,6 @@
 package com.moein.plantcare.controller;
 
+import com.moein.plantcare.model.Plant;
 import com.moein.plantcare.repository.PlantRepository;
 import com.moein.plantcare.view.PlantView;
 
@@ -15,5 +16,9 @@ public class PlantController {
 
 	public void allPlants() {
 		plantView.showAllPlants(plantRepository.findAll());
+	}
+
+	public void newPlant(Plant plant) {
+
 	}
 }
