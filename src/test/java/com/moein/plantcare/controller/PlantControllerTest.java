@@ -1,6 +1,7 @@
 package com.moein.plantcare.controller;
 
 import static java.util.Arrays.asList;
+import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -10,6 +11,7 @@ import java.util.List;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.InOrder;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -50,5 +52,19 @@ public class PlantControllerTest {
 		plantController.allPlants();
 
 		verify(plantView).showAllPlants(plants);
+	}
+
+	@Test
+	public void testNewPlantWhenPlantDoesNotAlreadyExist() {
+		Plant plant = new Plant("P001", "Monstera", "Living Room", 7, LocalDate.of(2000, 1, 3));
+
+		when(plantRepository.findById("P001")).thenReturn(null);
+
+		plantController.newPlant(plant);
+
+		InOrder inOrder = inOrder(plantRepository, plantView);
+
+		inOrder.verify(plantRepository).save(plant);
+		inOrder.verify(plantView).plantAdded(plant);
 	}
 }
