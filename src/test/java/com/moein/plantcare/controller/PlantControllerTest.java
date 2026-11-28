@@ -98,4 +98,17 @@ public class PlantControllerTest {
 		inOrder.verify(plantRepository).delete("P001");
 		inOrder.verify(plantView).plantRemoved(plantToDelete);
 	}
+
+	@Test
+	public void testDeletePlantWhenPlantDoesNotExist() {
+		Plant plant = new Plant("P001", "Monstera", "Living Room", 7, LocalDate.of(2000, 1, 3));
+
+		when(plantRepository.findById("P001")).thenReturn(null);
+
+		plantController.deletePlant(plant);
+
+		verify(plantView).showError("No existing plant with id P001", plant);
+
+		verifyNoMoreInteractions(ignoreStubs(plantRepository));
+	}
 }
