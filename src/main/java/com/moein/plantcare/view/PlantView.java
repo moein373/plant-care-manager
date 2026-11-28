@@ -10,4 +10,6 @@ public interface PlantView {
 
 	void plantAdded(Plant plant);
 
+	void showError(String message, Plant plant);
+
 }
