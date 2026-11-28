@@ -51,12 +51,14 @@
 			<version>1.47.0</version>
 			<scope>test</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-core</artifactId>
 			<version>4.11.0</version>
 			<scope>test</scope>
 		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -210,12 +212,16 @@
 								<param>com.moein.plantcare.model.Plant</param>
 								<param>
 									com.moein.plantcare.repository.mongo.PlantMongoRepository</param>
+								<param>
+									com.moein.plantcare.controller.PlantController</param>
 							</targetClasses>
 
 							<targetTests>
 								<param>com.moein.plantcare.model.PlantTest</param>
 								<param>
 									com.moein.plantcare.repository.mongo.PlantMongoRepositoryTest</param>
+								<param>
+									com.moein.plantcare.controller.PlantControllerTest</param>
 							</targetTests>
 
 							<mutators>
