@@ -31,6 +31,9 @@ public class PlantController {
 	}
 
 	public void deletePlant(Plant plant) {
-
+		if (plantRepository.findById(plant.getId()) != null) {
+			plantRepository.delete(plant.getId());
+			plantView.plantRemoved(plant);
+		}
 	}
 }
