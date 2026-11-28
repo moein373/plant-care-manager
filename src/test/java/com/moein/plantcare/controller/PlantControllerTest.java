@@ -84,4 +84,18 @@ public class PlantControllerTest {
 
 		verifyNoMoreInteractions(ignoreStubs(plantRepository));
 	}
+
+	@Test
+	public void testDeletePlantWhenPlantExists() {
+		Plant plantToDelete = new Plant("P001", "Monstera", "Living Room", 7, LocalDate.of(2000, 1, 3));
+
+		when(plantRepository.findById("P001")).thenReturn(plantToDelete);
+
+		plantController.deletePlant(plantToDelete);
+
+		InOrder inOrder = inOrder(plantRepository, plantView);
+
+		inOrder.verify(plantRepository).delete("P001");
+		inOrder.verify(plantView).plantRemoved(plantToDelete);
+	}
 }
