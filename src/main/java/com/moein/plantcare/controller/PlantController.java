@@ -19,6 +19,11 @@ public class PlantController {
 	}
 
 	public void newPlant(Plant plant) {
+		Plant existingPlant = plantRepository.findById(plant.getId());
 
+		if (existingPlant == null) {
+			plantRepository.save(plant);
+			plantView.plantAdded(plant);
+		}
 	}
 }
