@@ -21,9 +21,12 @@ public class PlantController {
 	public void newPlant(Plant plant) {
 		Plant existingPlant = plantRepository.findById(plant.getId());
 
-		if (existingPlant == null) {
-			plantRepository.save(plant);
-			plantView.plantAdded(plant);
+		if (existingPlant != null) {
+			plantView.showError("Already existing plant with id " + plant.getId(), existingPlant);
+			return;
 		}
+
+		plantRepository.save(plant);
+		plantView.plantAdded(plant);
 	}
 }
